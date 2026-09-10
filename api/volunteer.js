@@ -25,7 +25,15 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { name, email, whatsapp, city, interest, message, consent } = req.body || {};
+    const { name, email, whatsapp, city, interest, message, consent, website, honeypot } = req.body || {};
+
+    // Honeypot anti-spam check: se preenchido por robô, responde 200 silenciosamente sem processar
+    if (website || honeypot) {
+      return res.status(200).json({
+        success: true,
+        message: 'Cadastro recebido com sucesso!',
+      });
+    }
 
     // Validação obrigatória
     if (!name || typeof name !== 'string' || name.trim().length < 2) {
