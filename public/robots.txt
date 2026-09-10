@@ -1,0 +1,5 @@
+# Robots.txt — Website Oficial Larissa DeLucca (15888 MDB)
+User-agent: *
+Allow: /
+
+Sitemap: https://larissadelucca.com.br/sitemap.xml
