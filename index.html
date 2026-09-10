@@ -1,39 +1,37 @@
 <!DOCTYPE html>
-<html lang="pt-BR" data-theme="light">
+<html lang="pt-BR" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Larissa DeLucca — Deputada Estadual 15888 MDB | Site Oficial</title>
-    <meta name="description" content="Site oficial de Larissa DeLucca: Deputada Estadual 15888 MDB. Coragem pra mudar. Renda para Escolher. Rede para Conseguir. Proteção para Viver." />
+    <meta name="description" content="Site oficial de Larissa DeLucca: Deputada Estadual 15888 MDB Ceará. Coragem pra mudar. Renda para Escolher. Rede para Conseguir. Proteção para Viver." />
 
-    <!-- Anti-FOUC Theme Initialization Script -->
+    <!-- Anti-FOUC Theme Initialization Script (Default: dark mode cinematográfico) -->
     <script>
       (function() {
         try {
           var savedTheme = localStorage.getItem('dep-larissa-theme');
-          var theme = savedTheme;
-          if (!theme) {
-            theme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-          }
+          var theme = savedTheme || 'dark';
           document.documentElement.setAttribute('data-theme', theme);
         } catch (e) {
-          document.documentElement.setAttribute('data-theme', 'light');
+          document.documentElement.setAttribute('data-theme', 'dark');
         }
       })();
     </script>
 
-    <!-- Google Fonts Preconnect & Stylesheet: Montserrat + Inter -->
+    <!-- Google Fonts: Montserrat + Unbounded (Display Nikolas Benchmark) + Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@600;700;800;900&family=Unbounded:wght@700;800;900&display=swap" rel="stylesheet" />
 
     <!-- Open Graph Default Tags -->
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="pt_BR" />
     <meta property="og:title" content="Larissa DeLucca — Deputada Estadual 15888 MDB" />
     <meta property="og:description" content="Coragem pra mudar. Renda para Escolher. Rede para Conseguir. Proteção para Viver." />
+    <meta property="og:site_name" content="Larissa DeLucca 15888" />
   </head>
-  <body>
+  <body class="bg-dark text-white">
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { assetManifest } from '../../assets/assetManifest';
+import { Icon } from '../common/Icons';
 
-export function MediaSection() {
+export function MediaSection({ onOpenVideo }) {
   const videos = assetManifest.videos;
   const [openTranscript, setOpenTranscript] = useState({});
 
@@ -13,62 +14,93 @@ export function MediaSection() {
   };
 
   return (
-    <section className="media-section section-padding" style={{ background: 'var(--bg-surface)' }} aria-labelledby="media-heading">
+    <section className="nikolas-media-section" aria-labelledby="media-heading">
       <div className="container-xl">
-        <div className="section-header">
-          <span className="section-tag">Vídeos Oficiais</span>
-          <h2 id="media-heading" className="section-title">
-            Em Primeira Pessoa com Larissa DeLucca
+        <div className="section-head-nikolas text-center mb-5">
+          <div className="d-inline-flex align-items-center gap-2 mb-2">
+            <span className="live-dot-pulse"></span>
+            <span className="section-eyebrow-tag">VÍDEOS OFICIAIS & PRONUNCIAMENTOS</span>
+          </div>
+          <h2 id="media-heading" className="section-main-heading">
+            EM PRIMEIRA PESSOA COM LARISSA DELUCCA
           </h2>
-          <p className="section-subtitle">
-            Assista às mensagens em vídeo sobre os pilares da campanha, os desafios das famílias atípicas e o projeto para a ALCE.
+          <p className="section-sub-heading max-w-700 mx-auto">
+            Mensagens diretas sobre a luta pelas mães atípicas, autonomia feminina e propostas concretas para o Ceará.
           </p>
         </div>
 
         <div className="row g-4">
           {videos.map((vid) => (
             <div key={vid.id} className="col-12 col-lg-4">
-              <div className="video-card">
-                <div className="video-container">
+              <div className="nikolas-video-card">
+                {/* Visualizador de Vídeo com Gatilho para Modal ou Player Direto */}
+                <div className="video-player-box position-relative">
                   <video
-                    controls
+                    src={vid.src}
                     preload="metadata"
-                    aria-label={`Vídeo: ${vid.title}`}
-                    className="w-100"
+                    playsInline
+                    className="video-element"
+                  />
+                  <div
+                    className="video-overlay-play-cover"
+                    onClick={() => onOpenVideo && onOpenVideo(vid)}
+                    role="button"
+                    tabIndex={0}
+                    aria-label={`Reproduzir vídeo: ${vid.title}`}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        onOpenVideo && onOpenVideo(vid);
+                      }
+                    }}
                   >
-                    <source src={vid.src} type="video/mp4" />
-                    Seu navegador não suporta reprodução de vídeo HTML5.
-                  </video>
+                    <div className="play-pulse-circle">
+                      <Icon name="play" size={20} className="play-icon-triangle" />
+                    </div>
+                    <span className="play-hint-text">ASSISTIR VÍDEO</span>
+                  </div>
                 </div>
 
-                <div className="video-body">
-                  <div className="d-flex align-items-center justify-content-between mb-2">
-                    <span className="badge bg-secondary-subtle text-secondary small">
-                      {vid.thumbnailText}
-                    </span>
-                    <span className="small text-muted">{vid.duration}</span>
+                <div className="video-card-info p-4">
+                  <div className="d-flex align-items-center justify-content-between mb-3">
+                    <span className="badge-neon">{vid.thumbnailText}</span>
+                    <span className="video-duration-pill">{vid.duration}</span>
                   </div>
 
-                  <h3 className="video-title">{vid.title}</h3>
-                  <p className="video-desc">{vid.description}</p>
+                  <h3 className="video-card-headline">{vid.title}</h3>
+                  <p className="video-card-summary">{vid.description}</p>
 
-                  <div className="mt-auto pt-2 border-top">
+                  <div className="video-card-actions mt-3 pt-3 border-top border-light border-opacity-10 d-flex align-items-center justify-content-between">
                     <button
                       type="button"
-                      className="btn btn-sm btn-link text-decoration-none p-0 text-secondary"
+                      className="btn-transcript-toggle"
                       onClick={() => toggleTranscript(vid.id)}
                       aria-expanded={Boolean(openTranscript[vid.id])}
                     >
-                      <i className={`bi bi-chevron-${openTranscript[vid.id] ? 'up' : 'down'} me-1`} />
-                      {openTranscript[vid.id] ? 'Ocultar transcrição' : 'Ver transcrição acessível'}
+                      <Icon
+                        name={openTranscript[vid.id] ? 'close' : 'document'}
+                        size={15}
+                      />
+                      <span>
+                        {openTranscript[vid.id] ? 'Fechar transcrição' : 'Ver transcrição acessível'}
+                      </span>
                     </button>
 
-                    {openTranscript[vid.id] && (
-                      <div className="p-3 mt-2 rounded bg-light border small text-secondary" role="region">
-                        <strong>Transcrição resumida:</strong> {vid.description}
-                      </div>
-                    )}
+                    <button
+                      type="button"
+                      className="btn-play-modal-direct"
+                      onClick={() => onOpenVideo && onOpenVideo(vid)}
+                    >
+                      <span>Abrir</span>
+                      <Icon name="arrow-up-right" size={14} />
+                    </button>
                   </div>
+
+                  {openTranscript[vid.id] && (
+                    <div className="transcript-box-panel mt-3 p-3 rounded" role="region">
+                      <strong className="d-block text-white mb-1">Transcrição resumida:</strong>
+                      <p className="mb-0 small text-secondary">{vid.description}</p>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
@@ -78,3 +110,5 @@ export function MediaSection() {
     </section>
   );
 }
+
+export default MediaSection;

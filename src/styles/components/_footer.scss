@@ -8,16 +8,18 @@
 
   .footer-brand-title {
     font-family: var(--font-family-display);
-    font-weight: var(--font-weight-bold);
-    font-size: var(--font-size-xl);
+    font-weight: 900;
+    font-size: 1.5rem;
+    letter-spacing: 0.04em;
     color: #FFFFFF;
     margin-bottom: var(--space-2);
+    text-transform: uppercase;
   }
 
   .footer-brand-badge {
     font-size: var(--font-size-sm);
-    color: var(--brand-orange);
-    font-weight: var(--font-weight-semibold);
+    color: var(--brand-secondary);
+    font-weight: 700;
     letter-spacing: 0.5px;
     margin-bottom: var(--space-4);
   }
@@ -31,11 +33,12 @@
 
   .footer-heading {
     font-family: var(--font-family-display);
-    font-weight: var(--font-weight-bold);
+    font-weight: 800;
     font-size: var(--font-size-md);
     color: #FFFFFF;
     margin-bottom: var(--space-4);
-    letter-spacing: 0.25px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
   }
 
   .footer-links {
@@ -55,7 +58,7 @@
 
       &:hover,
       &:focus-visible {
-        color: var(--brand-orange);
+        color: var(--brand-secondary);
         text-decoration: underline;
       }
     }
@@ -67,27 +70,29 @@
     margin-top: var(--space-4);
 
     .social-icon-btn {
-      width: 40px;
-      height: 40px;
+      width: 44px;
+      height: 44px;
       border-radius: var(--radius-full);
       background: rgba(255, 255, 255, 0.08);
       color: #FFFFFF;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.15rem;
       text-decoration: none;
-      transition: background var(--transition-fast), transform var(--transition-fast);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      transition: all var(--transition-fast);
 
       &:hover {
         background: var(--brand-gradient);
+        border-color: transparent;
         transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(230, 0, 126, 0.4);
       }
     }
   }
 
   .footer-divider {
-    border-color: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.1);
     margin-top: var(--space-12);
     margin-bottom: var(--space-6);
   }

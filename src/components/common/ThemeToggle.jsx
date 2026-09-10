@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTheme } from '../../hooks/useTheme';
+import { Icon } from './Icons';
 
 export function ThemeToggle({ className = '' }) {
   const { isDark, toggleTheme } = useTheme();
@@ -12,7 +13,13 @@ export function ThemeToggle({ className = '' }) {
       aria-label={isDark ? 'Mudar para o Modo Claro' : 'Mudar para o Modo Escuro'}
       title={isDark ? 'Modo Claro' : 'Modo Escuro'}
     >
-      <i className={isDark ? 'bi bi-sun-fill text-warning' : 'bi bi-moon-stars-fill text-primary'} aria-hidden="true" />
+      <Icon
+        name={isDark ? 'sun' : 'moon'}
+        size={18}
+        className={isDark ? 'text-warning' : 'text-neon-magenta'}
+      />
     </button>
   );
 }
+
+export default ThemeToggle;

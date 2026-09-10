@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { siteConfig } from '../../config/site.config';
 import { socialConfig } from '../../config/social.config';
 import { legalConfig } from '../../config/legal.config';
+import { Icon } from '../common/Icons';
 
 export function Footer() {
   return (
@@ -11,7 +12,7 @@ export function Footer() {
         <div className="row g-4 justify-content-between">
           {/* Coluna 1: Marca & Lema */}
           <div className="col-12 col-md-5 col-lg-4">
-            <h2 className="footer-brand-title">{siteConfig.candidate.name}</h2>
+            <h2 className="footer-brand-title">LARISSA DELUCCA</h2>
             <div className="footer-brand-badge">
               {siteConfig.candidate.office} · {siteConfig.candidate.number} {siteConfig.candidate.party}
             </div>
@@ -27,7 +28,7 @@ export function Footer() {
                 className="social-icon-btn"
                 aria-label="Instagram Oficial de Larissa DeLucca"
               >
-                <i className="bi bi-instagram" aria-hidden="true" />
+                <Icon name="instagram" size={20} />
               </a>
               <a
                 href={socialConfig.whatsapp.url}
@@ -36,7 +37,7 @@ export function Footer() {
                 className="social-icon-btn"
                 aria-label="WhatsApp Oficial de Larissa DeLucca"
               >
-                <i className="bi bi-whatsapp" aria-hidden="true" />
+                <Icon name="whatsapp" size={20} />
               </a>
             </div>
           </div>
@@ -65,7 +66,7 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Coluna 4: Imprensa & Apoio */}
+          {/* Coluna 4: Imprensa & Contato */}
           <div className="col-12 col-md-4 col-lg-3">
             <h3 className="footer-heading">Imprensa & Contato</h3>
             <ul className="footer-links">
@@ -110,3 +111,5 @@ export function Footer() {
     </footer>
   );
 }
+
+export default Footer;

@@ -1,25 +1,43 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 export function PurposeSection() {
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+  };
+
   return (
     <section className="purpose-section section-padding" aria-labelledby="purpose-heading">
       <div className="container-xl">
-        <div className="section-header">
-          <span className="section-tag">Propósito & Compromisso</span>
-          <h2 id="purpose-heading" className="section-title">
+        <motion.div 
+          className="section-header"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
+        >
+          <motion.span variants={itemVariants} className="section-tag">Propósito & Compromisso</motion.span>
+          <motion.h2 variants={itemVariants} id="purpose-heading" className="section-title">
             Por que o Ceará precisa de coragem pra mudar?
-          </h2>
-          <p className="section-subtitle">
+          </motion.h2>
+          <motion.p variants={itemVariants} className="section-subtitle">
             A política tradicional esqueceu a rotina de quem cuida, de quem trabalha dobrado e de quem não encontra apoio do Estado quando mais precisa.
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
 
-        <div className="row g-4 align-items-stretch">
-          <div className="col-12 col-md-4">
-            <div className="brand-card h-100 p-4 d-flex flex-column justify-content-between">
+        <motion.div 
+          className="row g-4 align-items-stretch"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={{ visible: { transition: { staggerChildren: 0.15 } } }}
+        >
+          <motion.div variants={itemVariants} className="col-12 col-md-4">
+            <div className="brand-card h-100 p-4 d-flex flex-column justify-content-between shadow-sm">
               <div>
-                <div className="d-inline-flex p-3 rounded-3 mb-3" style={{ background: 'rgba(230,0,126,0.1)', color: 'var(--brand-pink)' }}>
+                <div className="d-inline-flex p-3 rounded-3 mb-3" style={{ background: 'var(--bg-accent-subtle)', color: 'var(--brand-secondary)' }}>
                   <i className="bi bi-people-fill fs-3" aria-hidden="true" />
                 </div>
                 <h3 className="fs-5 fw-bold mb-2">Quem cuida de quem cuida?</h3>
@@ -31,12 +49,12 @@ export function PurposeSection() {
                 <span className="badge bg-light text-dark border">Prioridade Zero</span>
               </div>
             </div>
-          </div>
+          </motion.div>
 
-          <div className="col-12 col-md-4">
-            <div className="brand-card h-100 p-4 d-flex flex-column justify-content-between">
+          <motion.div variants={itemVariants} className="col-12 col-md-4">
+            <div className="brand-card h-100 p-4 d-flex flex-column justify-content-between shadow-sm">
               <div>
-                <div className="d-inline-flex p-3 rounded-3 mb-3" style={{ background: 'rgba(255,138,0,0.1)', color: 'var(--brand-orange)' }}>
+                <div className="d-inline-flex p-3 rounded-3 mb-3" style={{ background: 'var(--bg-accent-subtle)', color: 'var(--brand-secondary)' }}>
                   <i className="bi bi-currency-dollar fs-3" aria-hidden="true" />
                 </div>
                 <h3 className="fs-5 fw-bold mb-2">Autonomia Financeira é Liberdade</h3>
@@ -48,12 +66,12 @@ export function PurposeSection() {
                 <span className="badge bg-light text-dark border">Geração de Renda</span>
               </div>
             </div>
-          </div>
+          </motion.div>
 
-          <div className="col-12 col-md-4">
-            <div className="brand-card h-100 p-4 d-flex flex-column justify-content-between">
+          <motion.div variants={itemVariants} className="col-12 col-md-4">
+            <div className="brand-card h-100 p-4 d-flex flex-column justify-content-between shadow-sm">
               <div>
-                <div className="d-inline-flex p-3 rounded-3 mb-3" style={{ background: 'rgba(255,186,0,0.15)', color: 'var(--brand-yellow)' }}>
+                <div className="d-inline-flex p-3 rounded-3 mb-3" style={{ background: 'var(--bg-accent-subtle)', color: 'var(--brand-secondary)' }}>
                   <i className="bi bi-shield-check fs-3" aria-hidden="true" />
                 </div>
                 <h3 className="fs-5 fw-bold mb-2">Um Estado que Realmente Entrega</h3>
@@ -65,15 +83,21 @@ export function PurposeSection() {
                 <span className="badge bg-light text-dark border">Fiscalização Ativa</span>
               </div>
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
-        <div className="text-center mt-5">
+        <motion.div 
+          className="text-center mt-5"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.5 }}
+        >
           <Link to="/quem-e-larissa" className="btn btn-brand-outline">
             <span>Conheça a história e trajetória de Larissa DeLucca</span>
             <i className="bi bi-arrow-right ms-2" aria-hidden="true" />
           </Link>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

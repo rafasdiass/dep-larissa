@@ -1,67 +1,67 @@
-// Tokens Primitivos da Marca Larissa DeLucca
-$brand-pink: #E6007E;
-$brand-orange: #FF8A00;
-$brand-yellow: #FFBA00;
-$brand-offwhite: #FFF7F3;
-$brand-black: #1A1A1A;
-$brand-gradient: linear-gradient(135deg, #E6007E 0%, #FF8A00 100%);
-$brand-gradient-hover: linear-gradient(135deg, #D40074 0%, #E67C00 100%);
+// Tokens Primitivos da Marca Larissa DeLucca (Dark Cinema & Neon Magenta / Roxo)
+$brand-purple-darkest: #07010A;
+$brand-purple-deep: #0E0213;
+$brand-purple-surface: #180722;
+$brand-purple-elevated: #240B32;
+$brand-purple-border: rgba(190, 0, 230, 0.22);
+$brand-magenta-neon: #E6007E;
+$brand-purple-neon: #B800E6;
+$brand-magenta-glow: rgba(230, 0, 126, 0.45);
+$brand-gold-neon: #FFB800;
+
+$brand-gradient: linear-gradient(135deg, #8A00B8 0%, #D200BD 50%, #E6007E 100%);
+$brand-gradient-hover: linear-gradient(135deg, #9E00D4 0%, #E6007E 50%, #FF269B 100%);
+$brand-gradient-dark: linear-gradient(180deg, rgba(14, 2, 19, 0) 0%, #0E0213 100%);
 
 :root {
   // Brand Primitives
-  --brand-pink: #{$brand-pink};
-  --brand-orange: #{$brand-orange};
-  --brand-yellow: #{$brand-yellow};
-  --brand-offwhite: #{$brand-offwhite};
-  --brand-black: #{$brand-black};
+  --brand-primary: #{$brand-purple-neon};
+  --brand-secondary: #{$brand-magenta-neon};
+  --brand-accent: #{$brand-gold-neon};
   --brand-gradient: #{$brand-gradient};
   --brand-gradient-hover: #{$brand-gradient-hover};
+  --brand-gradient-dark: #{$brand-gradient-dark};
 
-  // Semantic Tokens — Light Mode (Default)
-  --bg-primary: #FFF7F3;
-  --bg-surface: #FFFFFF;
-  --bg-surface-elevated: #FFFFFF;
-  --bg-accent-subtle: rgba(230, 0, 126, 0.05);
-  --text-primary: #1A1A1A;
-  --text-secondary: #4A4A4A;
-  --text-muted: #737373;
+  // Semantic Tokens — Padrão: DARK CINEMA (Estilo Nikolas Ferreira)
+  --bg-primary: #{$brand-purple-deep};
+  --bg-surface: #{$brand-purple-surface};
+  --bg-surface-elevated: #{$brand-purple-elevated};
+  --bg-accent-subtle: rgba(184, 0, 230, 0.08);
+  --text-primary: #FFFFFF;
+  --text-secondary: #D4C9DC;
+  --text-muted: #9D8DA8;
   --text-on-brand: #FFFFFF;
-  --border-color: rgba(230, 0, 126, 0.15);
-  --border-subtle: rgba(26, 26, 26, 0.08);
-  --focus-ring: rgba(230, 0, 126, 0.35);
-  --header-bg: rgba(255, 247, 243, 0.92);
-  --footer-bg: #1A1A1A;
-  --footer-text: #F5F5F5;
-  --footer-muted: #A3A3A3;
-  --card-shadow: 0 10px 30px -5px rgba(230, 0, 126, 0.08), 0 2px 8px -2px rgba(0, 0, 0, 0.04);
-  --card-shadow-hover: 0 16px 36px -4px rgba(230, 0, 126, 0.16), 0 4px 12px -2px rgba(0, 0, 0, 0.06);
-  --btn-primary-bg: #{$brand-pink};
+  --border-color: #{$brand-purple-border};
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --focus-ring: rgba(230, 0, 126, 0.5);
+  --header-bg: rgba(14, 2, 19, 0.85);
+  --footer-bg: #{$brand-purple-darkest};
+  --footer-text: #E5DDEB;
+  --footer-muted: #8E7D99;
+  --card-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.6), 0 0 20px rgba(184, 0, 230, 0.12);
+  --card-shadow-hover: 0 24px 50px -10px rgba(0, 0, 0, 0.8), 0 0 35px rgba(230, 0, 126, 0.35);
+  --btn-primary-bg: #{$brand-magenta-neon};
   --btn-primary-text: #FFFFFF;
-  --btn-secondary-bg: #{$brand-orange};
+  --btn-secondary-bg: #{$brand-purple-elevated};
   --btn-secondary-text: #FFFFFF;
 }
 
-[data-theme="dark"] {
-  // Semantic Tokens — Dark Mode
-  --bg-primary: #121212;
-  --bg-surface: #1E1E1E;
-  --bg-surface-elevated: #282828;
-  --bg-accent-subtle: rgba(255, 138, 0, 0.08);
-  --text-primary: #F5F5F5;
-  --text-secondary: #CCCCCC;
-  --text-muted: #999999;
+[data-theme="light"] {
+  --bg-primary: #F8F5FA;
+  --bg-surface: #FFFFFF;
+  --bg-surface-elevated: #FFFFFF;
+  --bg-accent-subtle: rgba(184, 0, 230, 0.05);
+  --text-primary: #180722;
+  --text-secondary: #4A3A52;
+  --text-muted: #7A6982;
   --text-on-brand: #FFFFFF;
-  --border-color: rgba(255, 138, 0, 0.25);
-  --border-subtle: rgba(255, 255, 255, 0.12);
-  --focus-ring: rgba(255, 138, 0, 0.45);
-  --header-bg: rgba(18, 18, 18, 0.94);
-  --footer-bg: #0A0A0A;
-  --footer-text: #E5E5E5;
-  --footer-muted: #888888;
-  --card-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.5);
-  --card-shadow-hover: 0 16px 36px -4px rgba(0, 0, 0, 0.65);
-  --btn-primary-bg: #{$brand-pink};
-  --btn-primary-text: #FFFFFF;
-  --btn-secondary-bg: #{$brand-orange};
-  --btn-secondary-text: #FFFFFF;
+  --border-color: rgba(184, 0, 230, 0.18);
+  --border-subtle: rgba(0, 0, 0, 0.08);
+  --focus-ring: rgba(184, 0, 230, 0.35);
+  --header-bg: rgba(248, 245, 250, 0.88);
+  --footer-bg: #14051B;
+  --footer-text: #F5F5F5;
+  --footer-muted: #A39BA8;
+  --card-shadow: 0 10px 30px -5px rgba(74, 14, 78, 0.1);
+  --card-shadow-hover: 0 18px 40px -4px rgba(74, 14, 78, 0.2);
 }

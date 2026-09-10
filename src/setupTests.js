@@ -18,3 +18,31 @@ Object.defineProperty(window, 'matchMedia', {
     dispatchEvent: vi.fn(),
   })),
 });
+
+// Mock IntersectionObserver for jsdom / framer-motion
+class MockIntersectionObserver {
+  constructor(callback) {
+    this.callback = callback;
+  }
+  observe() {
+    return null;
+  }
+  unobserve() {
+    return null;
+  }
+  disconnect() {
+    return null;
+  }
+}
+
+Object.defineProperty(window, 'IntersectionObserver', {
+  writable: true,
+  configurable: true,
+  value: MockIntersectionObserver,
+});
+
+Object.defineProperty(global, 'IntersectionObserver', {
+  writable: true,
+  configurable: true,
+  value: MockIntersectionObserver,
+});

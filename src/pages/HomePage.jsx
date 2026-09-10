@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { HeroSection } from '../components/home/HeroSection';
+import { StatsSection } from '../components/home/StatsSection';
 import { PurposeSection } from '../components/home/PurposeSection';
 import { PillarsSection } from '../components/home/PillarsSection';
 import { AxesSection } from '../components/home/AxesSection';
@@ -14,54 +15,78 @@ import { PressSection } from '../components/home/PressSection';
 import { OfficialChannelsSection } from '../components/home/OfficialChannelsSection';
 import { VolunteerCtaSection } from '../components/home/VolunteerCtaSection';
 import { FaqSection } from '../components/home/FaqSection';
+import { VideoModal } from '../components/common/VideoModal';
 
 export function HomePage() {
-  return (
-    <div className="home-page">
-      {/* 01. Hero Section com Foto Oficial, Duplo CTA e Identidade de Urna */}
-      <HeroSection />
+  const [activeVideo, setActiveVideo] = useState(null);
+  const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
 
-      {/* 02. Introdução e Propósito Institucional */}
+  const handleOpenVideo = (video) => {
+    setActiveVideo(video);
+    setIsVideoModalOpen(true);
+  };
+
+  const handleCloseVideo = () => {
+    setIsVideoModalOpen(false);
+    setActiveVideo(null);
+  };
+
+  return (
+    <div className="home-page-container">
+      {/* 01. Hero Section Estilo Nikolas Ferreira com Tipografia Gigante, Iluminação Neon e Duplo CTA */}
+      <HeroSection onOpenVideo={handleOpenVideo} />
+
+      {/* 02. Painel "Números que Importam" com Contadores de Impacto */}
+      <StatsSection />
+
+      {/* 03. Propósito e Mensagem Central */}
       <PurposeSection />
 
-      {/* 03. Os 3 Pilares da Campanha */}
+      {/* 04. Os 3 Pilares Fundamentais da Campanha */}
       <PillarsSection />
 
-      {/* 04. 4 Eixos Programáticos da ALCE */}
-      <AxesSection />
-
-      {/* 05. Destaques de Propostas Práticas */}
+      {/* 05. Destaques de Propostas Interativas com Filtros Dinâmicos */}
       <ProposalHighlights />
 
-      {/* 06. Como Funciona o Mandato na Assembleia */}
+      {/* 06. 4 Eixos Programáticos na Assembleia Legislativa */}
+      <AxesSection />
+
+      {/* 07. Como Funciona o Mandato Parlamentar */}
       <MandateExplainer />
 
-      {/* 07. Plano de Mandato em PDF (Download Direto) */}
+      {/* 08. Plano de Mandato em PDF com Download Direto */}
       <PlanPreviewSection />
 
-      {/* 08. Transparência, Método e Compromissos Éticos */}
-      <TransparencySection />
+      {/* 09. Mídia e Vídeos Oficiais com Lightbox Modal */}
+      <MediaSection onOpenVideo={handleOpenVideo} />
 
-      {/* 09. Trajetória e História com Fotos Oficiais */}
+      {/* 10. Trajetória e Perfil Oficial */}
       <TrajectoryPreview />
 
-      {/* 10. Seção de Mídia e Vídeos Oficiais com Transcrição */}
-      <MediaSection />
+      {/* 11. Transparência e Prestação de Contas Ética */}
+      <TransparencySection />
 
-      {/* 11. Materiais de Campanha e Adesivos */}
+      {/* 12. Materiais de Campanha para Download */}
       <MaterialsSection />
 
-      {/* 12. Sala de Imprensa e Releases */}
+      {/* 13. Sala de Imprensa e Notícias */}
       <PressSection />
 
-      {/* 13. Canais Oficiais de Comunicação (WhatsApp e Instagram) */}
+      {/* 14. Canais Oficiais de Comunicação */}
       <OfficialChannelsSection />
 
-      {/* 14. Chamada de Apoiadores e Voluntários */}
+      {/* 15. Apoiadores, Embaixadores e Voluntariado */}
       <VolunteerCtaSection />
 
-      {/* 15. Perguntas & Respostas Frequentes (FAQ) */}
+      {/* 16. Perguntas Frequentes (FAQ) Interativo */}
       <FaqSection />
+
+      {/* Modal de Vídeo Dinâmico (Overlay Imersivo) */}
+      <VideoModal
+        isOpen={isVideoModalOpen}
+        video={activeVideo}
+        onClose={handleCloseVideo}
+      />
     </div>
   );
 }

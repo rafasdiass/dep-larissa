@@ -3,6 +3,7 @@ import { Outlet } from 'react-router-dom';
 import { Header } from './Header';
 import { Footer } from './Footer';
 import { SkipLink } from '../common/SkipLink';
+import { WhatsAppFab } from '../common/WhatsAppFab';
 
 export function MainLayout() {
   return (
@@ -13,6 +14,10 @@ export function MainLayout() {
         <Outlet />
       </main>
       <Footer />
+      {/* Botão Flutuante Persistente do Canal Oficial no WhatsApp (Padrão Nikolas Ferreira) */}
+      <WhatsAppFab />
     </>
   );
 }
+
+export default MainLayout;
