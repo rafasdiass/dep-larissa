@@ -5,6 +5,9 @@ import { socialConfig } from '../config/social.config';
 import { assetManifest } from '../assets/assetManifest';
 
 export function BioPage() {
+  const bioImg = assetManifest.images.bio;
+  const trajImg = assetManifest.images.trajectory;
+
   const milestones = [
     {
       year: 'Trajetória Profissional',
@@ -54,36 +57,32 @@ export function BioPage() {
           </p>
         </header>
 
-        {/* Bloco de Apresentação */}
+        {/* Bloco de Apresentação com Foto Real */}
         <div className="row g-5 align-items-center mb-5">
           <div className="col-12 col-lg-5">
             <div
-              className="bio-photo-card p-4 text-center"
+              className="bio-photo-card p-2 text-center shadow-lg"
               style={{
                 background: 'var(--brand-gradient)',
                 borderRadius: 'var(--radius-xl)',
-                color: '#FFFFFF',
               }}
             >
-              <div
-                className="rounded-circle bg-white text-dark mx-auto mb-4 d-flex align-items-center justify-content-center shadow"
-                style={{
-                  width: '200px',
-                  height: '200px',
-                  fontSize: '4rem',
-                  fontFamily: 'var(--font-family-display)',
-                  fontWeight: 'bold',
-                  background: 'var(--bg-surface)',
-                  color: 'var(--brand-pink)',
-                }}
-              >
-                LD
+              <div className="rounded-4 overflow-hidden" style={{ background: '#FFFFFF' }}>
+                <img
+                  src={bioImg.src}
+                  alt={bioImg.alt}
+                  width={bioImg.width}
+                  height={bioImg.height}
+                  className="img-fluid w-100"
+                  style={{ maxHeight: '480px', objectFit: 'cover', objectPosition: 'top' }}
+                />
+                <div className="p-3 bg-white">
+                  <h2 className="fs-4 fw-bold text-dark mb-1">{siteConfig.candidate.name}</h2>
+                  <p className="small text-secondary mb-0">
+                    {siteConfig.candidate.office} · {siteConfig.candidate.number} {siteConfig.candidate.party}
+                  </p>
+                </div>
               </div>
-              <h2 className="fs-3 fw-bold text-white mb-1">{siteConfig.candidate.name}</h2>
-              <p className="mb-3 text-white-50">{siteConfig.candidate.office} · {siteConfig.candidate.number} {siteConfig.candidate.party}</p>
-              <p className="small mb-0 text-white" style={{ opacity: 0.95 }}>
-                "{siteConfig.candidate.slogan}"
-              </p>
             </div>
           </div>
 
@@ -102,7 +101,7 @@ export function BioPage() {
             <div className="d-flex flex-wrap gap-3">
               <Link to="/propostas" className="btn btn-brand-primary">
                 Ver Propostas Legislativas
-                <i className="bi bi-arrow-right" aria-hidden="true" />
+                <i className="bi bi-arrow-right ms-2" aria-hidden="true" />
               </Link>
               <a
                 href={socialConfig.instagram.url}
@@ -110,7 +109,7 @@ export function BioPage() {
                 rel="noopener noreferrer"
                 className="btn btn-brand-outline"
               >
-                <i className="bi bi-instagram" aria-hidden="true" />
+                <i className="bi bi-instagram me-2" aria-hidden="true" />
                 Seguir no Instagram
               </a>
             </div>
@@ -155,7 +154,7 @@ export function BioPage() {
           </div>
         </section>
 
-        {/* Vídeos de Apresentação */}
+        {/* Vídeos de Apresentação com Players Reais */}
         <section className="videos-section my-5 pt-4">
           <div className="text-center mb-5">
             <h2 className="fw-bold fs-2">Em Primeira Pessoa</h2>
@@ -165,32 +164,20 @@ export function BioPage() {
           <div className="row g-4 justify-content-center">
             {assetManifest.videos.map((v) => (
               <div key={v.id} className="col-12 col-md-4">
-                <div className="brand-card h-100 text-center">
-                  <div
-                    className="video-placeholder mb-3 d-flex flex-column align-items-center justify-content-center"
-                    style={{
-                      height: '180px',
-                      borderRadius: 'var(--radius-md)',
-                      background: 'var(--bg-accent-subtle)',
-                      border: '1px dashed var(--brand-pink)',
-                    }}
-                  >
-                    <div
-                      className="play-btn rounded-circle mb-2 d-flex align-items-center justify-content-center shadow"
-                      style={{
-                        width: 48,
-                        height: 48,
-                        background: 'var(--brand-gradient)',
-                        color: '#FFFFFF',
-                      }}
-                    >
-                      <i className="bi bi-play-fill fs-4" aria-hidden="true" />
-                    </div>
-                    <span className="small text-secondary fw-semibold">{v.thumbnailText}</span>
-                    <span className="badge bg-dark text-light mt-1" style={{ fontSize: '0.7rem' }}>{v.duration}</span>
+                <div className="video-card h-100">
+                  <div className="video-container">
+                    <video controls preload="metadata" className="w-100" aria-label={`Vídeo: ${v.title}`}>
+                      <source src={v.src} type="video/mp4" />
+                      Seu navegador não suporta reprodução de vídeo.
+                    </video>
                   </div>
-                  <h3 className="fs-6 fw-bold mb-2">{v.title}</h3>
-                  <p className="text-muted small mb-0">Arquivo: {v.fileName}</p>
+                  <div className="video-body">
+                    <span className="badge bg-secondary-subtle text-secondary small mb-2 d-inline-block">
+                      {v.thumbnailText} · {v.duration}
+                    </span>
+                    <h3 className="fs-6 fw-bold mb-2">{v.title}</h3>
+                    <p className="text-muted small mb-0">{v.description}</p>
+                  </div>
                 </div>
               </div>
             ))}
