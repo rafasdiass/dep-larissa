@@ -29,7 +29,7 @@ describe('App Routing', () => {
         <App />
       </MemoryRouter>
     );
-    expect(screen.getByRole('heading', { level: 1, name: /autonomia econômica/i })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { level: 1, name: /autonomia e trabalho/i })).toBeInTheDocument();
   });
 
   it('navigates to /plano-de-mandato', () => {

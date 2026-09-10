@@ -5,7 +5,11 @@ import { ScrollToTop } from './components/common/ScrollToTop';
 import { HomePage } from './pages/HomePage';
 import { BioPage } from './pages/BioPage';
 import { ProposalsPage } from './pages/ProposalsPage';
-import { ProposalDetailPage } from './pages/ProposalDetailPage';
+import { AutonomiaTrabalhoPage } from './pages/proposals/AutonomiaTrabalhoPage';
+import { MaternidadeCuidadoPage } from './pages/proposals/MaternidadeCuidadoPage';
+import { ProtecaoMulheresPage } from './pages/proposals/ProtecaoMulheresPage';
+import { EstadoEntregaPage } from './pages/proposals/EstadoEntregaPage';
+import { IndividualProposalPage } from './pages/proposals/IndividualProposalPage';
 import { MandatePlanPage } from './pages/MandatePlanPage';
 import { TransparencyPage } from './pages/TransparencyPage';
 import { MaterialsPage } from './pages/MaterialsPage';
@@ -24,7 +28,17 @@ export function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/quem-e-larissa" element={<BioPage />} />
           <Route path="/propostas" element={<ProposalsPage />} />
-          <Route path="/propostas/:slug" element={<ProposalDetailPage />} />
+
+          {/* Rotas Canônicas dos 4 Eixos */}
+          <Route path="/propostas/autonomia-e-trabalho" element={<AutonomiaTrabalhoPage />} />
+          <Route path="/propostas/maternidade-infancia-rede-cuidado" element={<MaternidadeCuidadoPage />} />
+          <Route path="/propostas/protecao-as-mulheres" element={<ProtecaoMulheresPage />} />
+          <Route path="/propostas/estado-que-enxerga-integra-entrega" element={<EstadoEntregaPage />} />
+
+          {/* Rota Individual de Proposta */}
+          <Route path="/proposta/:slug" element={<IndividualProposalPage />} />
+
+          {/* Demais Páginas Oficiais */}
           <Route path="/plano-de-mandato" element={<MandatePlanPage />} />
           <Route path="/transparencia" element={<TransparencyPage />} />
           <Route path="/materiais" element={<MaterialsPage />} />
