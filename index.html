@@ -1,37 +1,34 @@
 <!DOCTYPE html>
-<html lang="pt-BR" data-theme="light">
+<html lang="pt-BR" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Larissa DeLucca — Deputada Estadual 15888 MDB | Site Oficial</title>
-    <meta name="description" content="Site oficial de Larissa DeLucca: Deputada Estadual 15888 MDB. Coragem pra mudar. Renda para Escolher. Rede para Conseguir. Proteção para Viver." />
+    <meta name="description" content="Site oficial de Larissa DeLucca: Deputada Estadual 15888 MDB Ceará. Coragem pra mudar. Renda para Escolher. Rede para Conseguir. Proteção para Viver." />
 
-    <!-- Anti-FOUC Theme Initialization Script -->
+    <!-- Apply the saved theme before first paint; use the same default as React. -->
     <script>
       (function() {
         try {
           var savedTheme = localStorage.getItem('dep-larissa-theme');
-          var theme = savedTheme;
-          if (!theme) {
-            theme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-          }
+          var theme = savedTheme === 'dark' ? 'dark' : 'light';
           document.documentElement.setAttribute('data-theme', theme);
+          document.documentElement.setAttribute('data-bs-theme', theme);
         } catch (e) {
           document.documentElement.setAttribute('data-theme', 'light');
+          document.documentElement.setAttribute('data-bs-theme', 'light');
         }
       })();
     </script>
 
-    <!-- Google Fonts Preconnect & Stylesheet: Montserrat + Inter -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet" />
-
+    <link rel="preload" href="/assets/fonts/barlow-condensed-800-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/assets/fonts/inter-400-800-latin.woff2" as="font" type="font/woff2" crossorigin />
     <!-- Open Graph Default Tags -->
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="pt_BR" />
     <meta property="og:title" content="Larissa DeLucca — Deputada Estadual 15888 MDB" />
     <meta property="og:description" content="Coragem pra mudar. Renda para Escolher. Rede para Conseguir. Proteção para Viver." />
+    <meta property="og:site_name" content="Larissa DeLucca 15888" />
   </head>
   <body>
     <div id="root"></div>

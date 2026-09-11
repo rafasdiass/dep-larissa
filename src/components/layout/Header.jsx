@@ -1,72 +1,50 @@
-import React, { useState } from 'react';
-import { NavLink, Link } from 'react-router-dom';
-import { siteConfig } from '../../config/site.config';
-import { socialConfig } from '../../config/social.config';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
+import { NavLink, Link, useLocation } from 'react-router-dom';
 import { ThemeToggle } from '../common/ThemeToggle';
 import { MobileOffcanvas } from './MobileOffcanvas';
+import { Icon } from '../common/Icons';
+import { socialConfig } from '../../config/social.config';
 
 export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
+  const [isScrolled, setIsScrolled] = useState(false);
+  const menuButton = useRef(null);
+  const location = useLocation();
+  const closeMenu = useCallback(() => setIsMobileMenuOpen(false), []);
+  useEffect(() => {
+    const update = () => setIsScrolled(window.scrollY > 24);
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+    return () => window.removeEventListener('scroll', update);
+  }, []);
+  useEffect(closeMenu, [location.pathname, closeMenu]);
+  const links = [
+    ['Quem é Larissa', '/quem-e-larissa'],
+    ['Propostas', '/propostas'],
+    ['Plano de mandato', '/plano-de-mandato'],
+    ['Transparência', '/transparencia'],
+    ['Contato', '/contato'],
+  ];
   return (
     <>
-      <header className="site-header py-2" role="banner">
-        <div className="container-xl d-flex align-items-center justify-content-between">
-          <Link to="/" className="header-brand" aria-label="Larissa DeLucca — Página Inicial">
-            <div className="brand-avatar-badge" aria-hidden="true">
-              LD
-            </div>
-            <div>
-              <span className="brand-title d-block">{siteConfig.candidate.name}</span>
-              <span className="brand-badge d-block">
-                {siteConfig.candidate.office} · {siteConfig.candidate.number} {siteConfig.candidate.party}
-              </span>
-            </div>
+      <header className={`site-header ${isScrolled ? 'is-scrolled' : ''}`}>
+        <div className="container-xl header-inner">
+          <Link to="/" className="header-brand" aria-label="Larissa DeLucca — Início">
+            <span className="brand-office">DEPUTADA ESTADUAL</span>
+            <span className="brand-name">Larissa DeLucca</span>
+            <span className="brand-state">15888 <span>MDB · CEARÁ</span></span>
           </Link>
-
-          <nav className="d-none d-lg-flex align-items-center gap-1" role="navigation" aria-label="Navegação Principal">
-            <NavLink to="/" end className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
-              Início
-            </NavLink>
-            {siteConfig.navLinks.map((link) => (
-              <NavLink
-                key={link.href}
-                to={link.href}
-                className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
-              >
-                {link.label}
-              </NavLink>
-            ))}
+          <nav className="header-nav" aria-label="Navegação Principal">
+            {links.map(([label, href]) => <NavLink key={href} to={href} className={({isActive}) => `nav-link-item ${isActive ? 'active' : ''}`}>{label}</NavLink>)}
           </nav>
-
           <div className="header-actions">
-            <a
-              href={socialConfig.whatsapp.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-brand-primary btn-sm d-none d-sm-inline-flex"
-              aria-label="Abrir WhatsApp oficial da campanha"
-            >
-              <i className="bi bi-whatsapp" aria-hidden="true" />
-              <span>WhatsApp</span>
-            </a>
-
+            <a href={socialConfig.instagram.url} className="header-social" target="_blank" rel="noreferrer" aria-label="Instagram oficial"><Icon name="instagram" size={20} /></a>
             <ThemeToggle />
-
-            <button
-              type="button"
-              className="mobile-menu-btn"
-              onClick={() => setIsMobileMenuOpen(true)}
-              aria-label="Abrir menu de navegação"
-              aria-expanded={isMobileMenuOpen}
-            >
-              <i className="bi bi-list" aria-hidden="true" />
-            </button>
+            <button ref={menuButton} className="btn-mobile-drawer-toggle" type="button" aria-label="Abrir menu de navegação" aria-controls="mobile-navigation" aria-expanded={isMobileMenuOpen} onClick={() => setIsMobileMenuOpen(true)}><Icon name="menu" size={24} /></button>
           </div>
         </div>
       </header>
-
-      <MobileOffcanvas isOpen={isMobileMenuOpen} onClose={() => setIsMobileMenuOpen(false)} />
+      <MobileOffcanvas isOpen={isMobileMenuOpen} onClose={closeMenu} returnFocusRef={menuButton} />
     </>
   );
 }

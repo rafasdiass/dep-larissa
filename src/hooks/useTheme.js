@@ -5,14 +5,16 @@ const THEME_KEY = 'dep-larissa-theme';
 export function useTheme() {
   const [theme, setTheme] = useState(() => {
     if (typeof window === 'undefined') return 'light';
-    const saved = localStorage.getItem(THEME_KEY);
-    if (saved === 'light' || saved === 'dark') return saved;
-    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    try {
+      const saved = localStorage.getItem(THEME_KEY);
+      return saved === 'dark' ? 'dark' : 'light';
+    } catch { return 'light'; }
   });
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem(THEME_KEY, theme);
+    document.documentElement.setAttribute('data-bs-theme', theme);
+    try { localStorage.setItem(THEME_KEY, theme); } catch { /* Theme remains usable without storage. */ }
   }, [theme]);
 
   const toggleTheme = () => {

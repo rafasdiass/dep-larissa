@@ -1,71 +1,84 @@
 /**
- * Manifest de Assets Oficiais do Website Larissa DeLucca
- * Centraliza referências a fotos de campanha, vídeos e plano de mandato.
+ * Manifest de Assets Oficiais do Website Larissa DeLucca (15888 MDB)
+ * Mapeia as fotos, vídeos e documentos oficiais com caminhos públicos e metadados.
  */
 export const assetManifest = {
   images: {
     hero: {
-      fileName: 'cbe275b3-dfc4-53ea-8a55-8257f0d14f31.jpg',
-      alt: 'Larissa DeLucca, candidata a Deputada Estadual 15888',
-      role: 'Foto principal da Hero Section',
+      fileName: 'larissa-retrato-principal.jpg',
+      src: '/assets/images/larissa-retrato-principal.jpg',
+      alt: 'Larissa DeLucca, candidata a Deputada Estadual 15888 pelo MDB Ceará',
+      role: 'Retrato principal', width: 1120, height: 1600,
     },
     bio: {
-      fileName: '3b89a2ae-2796-56c5-9ed9-09a2ebc6e823.jpg',
-      alt: 'Larissa DeLucca em diálogo com lideranças comunitárias',
-      role: 'Foto de apresentação e perfil',
+      fileName: 'larissa-retrato-perfil.jpg',
+      src: '/assets/images/larissa-retrato-perfil.jpg',
+      alt: 'Retrato de perfil de Larissa DeLucca',
+      role: 'Retrato da biografia', width: 1144, height: 1600,
     },
     trajectory: {
-      fileName: 'e5d0ae6a-5513-59f8-b975-bcfb322f5fbe.jpg',
-      alt: 'Larissa DeLucca em atuação na Fundação Mulheres Aceleradas',
-      role: 'Trajetória profissional e social',
+      fileName: 'larissa-retrato-frontal.jpg',
+      src: '/assets/images/larissa-retrato-frontal.jpg',
+      alt: 'Retrato de Larissa DeLucca',
+      role: 'Retrato complementar', width: 1142, height: 1600,
     },
+    // Design references are not photographs and must not appear as landing-page imagery.
     palette: {
-      fileName: '4b3408dd-1c9c-573c-89a3-49920f6e4ecd.jpg',
-      alt: 'Identidade visual e paleta de cores da campanha',
-      role: 'Referência visual oficial',
+      src: '/assets/images/hero-larissa-delucca.jpg',
+      alt: 'Manual de cores da campanha', role: 'Referência de design',
+      width: 1024, height: 1536,
     },
     gradient: {
-      fileName: 'b384f390-1aee-578c-95bd-00b2657fc84c.jpg',
-      alt: 'Degradê oficial Rosa, Laranja e Amarelo',
-      role: 'Textura e identidade de fundo',
+      src: '/assets/images/bio-larissa-delucca.jpg',
+      alt: 'Degradê rosa, laranja e amarelo', role: 'Referência de design',
+      width: 1024, height: 1536,
     },
     socialLanguage: {
-      fileName: '89ae92b3-0fad-5201-a8d0-56f2594a51e0.jpg',
-      alt: 'Linguagem digital de acolhimento e escuta ativa',
-      role: 'Cards de redes sociais',
+      src: '/assets/images/trajetoria-larissa-delucca.jpg',
+      alt: 'Arte de campanha de Larissa DeLucca', role: 'Material de campanha',
+      width: 1089, height: 1445,
     },
   },
   videos: [
     {
-      id: 'video-1',
+      id: 'video-apresentacao',
       title: 'Por que sou candidata a Deputada Estadual',
-      fileName: 'WhatsApp Video 2026-09-10 at 13.34.05(1).mp4',
-      duration: '1:12',
+      description: 'Larissa DeLucca compartilha sua trajetória como advogada, mãe atípica e sua motivação para disputar a Assembleia Legislativa do Ceará.',
+      src: '/assets/videos/apresentacao-larissa-delucca.mp4',
+      poster: '/assets/images/video-posters/apresentacao.jpg',
+      fileName: 'apresentacao-larissa-delucca.mp4',
+      duration: '1:03',
       thumbnailText: 'Apresentação Oficial',
     },
     {
-      id: 'video-2',
+      id: 'video-maes-atipicas',
       title: 'A Luta das Mães Atípicas no Ceará',
-      fileName: 'WhatsApp Video 2026-09-10 at 13.36.10(1).mp4',
-      duration: '1:45',
+      description: 'O diagnóstico da carência de terapias multidisciplinares (T.O., fonoaudiologia, psicologia) e a proposta de uma Rede Estadual de Apoio Integral.',
+      src: '/assets/videos/maes-atipicas-larissa-delucca.mp4',
+      poster: '/assets/images/video-posters/maes-atipicas.jpg',
+      fileName: 'maes-atipicas-larissa-delucca.mp4',
+      duration: '0:24',
       thumbnailText: 'Maternidade e Inclusão',
     },
     {
-      id: 'video-3',
+      id: 'video-mulheres-aceleradas',
       title: 'Mulheres Aceleradas: Autonomia e Renda',
-      fileName: 'WhatsApp Video 2026-09-10 at 13.39.09(1).mp4',
-      duration: '1:30',
+      description: 'Como o microcrédito orientado e a capacitação feminina transformam famílias e geram independência real.',
+      src: '/assets/videos/mulheres-aceleradas-larissa-delucca.mp4',
+      poster: '/assets/images/video-posters/mulheres-aceleradas.jpg',
+      fileName: 'mulheres-aceleradas-larissa-delucca.mp4',
+      duration: '0:55',
       thumbnailText: 'Autonomia Econômica',
     },
   ],
   documents: {
     mandatePlan: {
-      fileName: 'Plano de mandato (1).pdf',
+      fileName: 'plano-de-mandato-larissa-delucca-15888.pdf',
+      downloadUrl: '/assets/docs/plano-de-mandato-larissa-delucca-15888.pdf',
       title: 'Plano de Mandato — Larissa DeLucca Deputada Estadual 15888',
       version: '1.0 Oficial',
       pages: '28 páginas',
-      size: '4.2 MB',
-      downloadUrl: '/docs/plano-de-mandato-larissa-delucca-15888.pdf',
+      size: '672 KB',
     },
   },
 };
