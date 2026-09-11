@@ -9,10 +9,10 @@
 - **Core:** React 18 + Vite
 - **Roteamento:** React Router v6
 - **Estilização:** SCSS Modular com Design Tokens oficiais
-- **Grid & Reset:** Bootstrap 5.3 (apenas Grid responsivo e Reboot)
+- **Componentes e Grid:** Bootstrap 5.3, com estilos completos de formulários, botões, navegação e utilitários
 - **Ícones:** Bootstrap Icons
-- **Acessibilidade:** WCAG 2.2 Nível AA (Skip-links, foco visível, contraste cromático, modo escuro nativo)
-- **Backend / Serverless:** Vercel Serverless Function (`api/volunteer.js`) com proteção honeypot e zero banco de dados no MVP.
+- **Acessibilidade:** Skip-link, foco visível, navegação por teclado em menus e vídeos, contraste dos pares principais e preferência por movimento reduzido (sem certificação WCAG)
+- **Backend / Serverless:** Vercel Serverless Function (`api/volunteer.js`) com honeypot. O envio exige `VOLUNTEER_WEBHOOK_URL` configurado na Vercel; sem integração ou em caso de falha, não confirma cadastro e oferece contato pelo WhatsApp.
 - **Crédito Obrigatório:** Presente e centralizado no rodapé: *"Criação e desenvolvimento: Lavita Code"*.
 
 ---
@@ -34,7 +34,7 @@ dep-larissa/
 │   ├── assets/                   # Mapeamento e manifest de assets
 │   ├── components/
 │   │   ├── common/               # Breadcrumbs, SkipLink, ThemeToggle, VolunteerForm, SEO
-│   │   ├── home/                 # As 15 seções modulares da Home Page
+│   │   ├── home/                 # Seções editoriais da Home Page
 │   │   ├── layout/               # Header, Footer, MobileOffcanvas, MainLayout
 │   │   └── proposals/            # ProposalExplorer, RelatedProposals
 │   ├── config/                   # Configurações centralizadas (site, social, legal, seo)

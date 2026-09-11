@@ -1,113 +1,50 @@
-import React, { useState, useEffect } from 'react';
-import { NavLink, Link } from 'react-router-dom';
-import { siteConfig } from '../../config/site.config';
-import { socialConfig } from '../../config/social.config';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
+import { NavLink, Link, useLocation } from 'react-router-dom';
 import { ThemeToggle } from '../common/ThemeToggle';
 import { MobileOffcanvas } from './MobileOffcanvas';
 import { Icon } from '../common/Icons';
+import { socialConfig } from '../../config/social.config';
 
 export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-
+  const menuButton = useRef(null);
+  const location = useLocation();
+  const closeMenu = useCallback(() => setIsMobileMenuOpen(false), []);
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    const update = () => setIsScrolled(window.scrollY > 24);
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+    return () => window.removeEventListener('scroll', update);
   }, []);
-
-  const primaryNavItems = [
-    { label: 'Início', href: '/', icon: 'house' },
-    { label: 'Quem é Larissa', href: '/quem-e-larissa', icon: 'person' },
-    { label: 'Propostas', href: '/propostas', icon: 'document' },
-    { label: 'Plano de Mandato', href: '/plano-de-mandato', icon: 'download' },
-    { label: 'Transparência', href: '/transparencia', icon: 'shield' },
-    { label: 'Materiais', href: '/materiais', icon: 'box' },
-    { label: 'Contato', href: '/contato', icon: 'envelope' },
+  useEffect(closeMenu, [location.pathname, closeMenu]);
+  const links = [
+    ['Quem é Larissa', '/quem-e-larissa'],
+    ['Propostas', '/propostas'],
+    ['Plano de mandato', '/plano-de-mandato'],
+    ['Transparência', '/transparencia'],
+    ['Contato', '/contato'],
   ];
-
   return (
     <>
-      <header
-        className={`site-header ${isScrolled ? 'is-scrolled' : ''}`}
-        role="banner"
-      >
-        <div className="container-fluid px-3 px-xl-5">
-          <div className="d-flex align-items-center justify-content-between">
-            {/* Logo / Marca do Candidato */}
-            <Link to="/" className="header-brand" aria-label="Larissa DeLucca — Início">
-              <div className="brand-logo-container">
-                <div className="brand-symbol">
-                  <span>LD</span>
-                </div>
-                <div className="brand-text-block">
-                  <span className="brand-candidate-name">{siteConfig.candidate.name}</span>
-                  <div className="brand-meta-badge">
-                    <span className="badge-office">DEPUTADA ESTADUAL</span>
-                    <span className="badge-number">15888 {siteConfig.candidate.party}</span>
-                  </div>
-                </div>
-              </div>
-            </Link>
-
-            {/* Navegação Desktop com Ícones SVG Nativos */}
-            <nav
-              className="d-none d-xl-flex align-items-center header-nav"
-              role="navigation"
-              aria-label="Navegação Principal"
-            >
-              {primaryNavItems.map((item) => (
-                <NavLink
-                  key={item.href}
-                  to={item.href}
-                  end={item.href === '/'}
-                  className={({ isActive }) =>
-                    `nav-link-item ${isActive ? 'active' : ''}`
-                  }
-                >
-                  <Icon name={item.icon} size={16} className="nav-icon" />
-                  <span>{item.label}</span>
-                </NavLink>
-              ))}
-            </nav>
-
-            {/* Ações do Topo: WhatsApp de Destaque + Theme Toggle + Mobile Toggle */}
-            <div className="header-actions-group d-flex align-items-center gap-2 gap-sm-3">
-              <a
-                href={socialConfig.whatsapp.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-header-whatsapp d-none d-md-inline-flex align-items-center gap-2"
-                aria-label="Canal Oficial no WhatsApp"
-              >
-                <Icon name="whatsapp" size={18} />
-                <span>CANAL NO WHATSAPP</span>
-              </a>
-
-              <ThemeToggle />
-
-              <button
-                type="button"
-                className="btn-mobile-drawer-toggle d-xl-none"
-                onClick={() => setIsMobileMenuOpen(true)}
-                aria-label="Abrir menu de navegação"
-                aria-expanded={isMobileMenuOpen}
-              >
-                <Icon name="menu" size={24} />
-              </button>
-            </div>
+      <header className={`site-header ${isScrolled ? 'is-scrolled' : ''}`}>
+        <div className="container-xl header-inner">
+          <Link to="/" className="header-brand" aria-label="Larissa DeLucca — Início">
+            <span className="brand-office">DEPUTADA ESTADUAL</span>
+            <span className="brand-name">Larissa DeLucca</span>
+            <span className="brand-state">15888 <span>MDB · CEARÁ</span></span>
+          </Link>
+          <nav className="header-nav" aria-label="Navegação Principal">
+            {links.map(([label, href]) => <NavLink key={href} to={href} className={({isActive}) => `nav-link-item ${isActive ? 'active' : ''}`}>{label}</NavLink>)}
+          </nav>
+          <div className="header-actions">
+            <a href={socialConfig.instagram.url} className="header-social" target="_blank" rel="noreferrer" aria-label="Instagram oficial"><Icon name="instagram" size={20} /></a>
+            <ThemeToggle />
+            <button ref={menuButton} className="btn-mobile-drawer-toggle" type="button" aria-label="Abrir menu de navegação" aria-controls="mobile-navigation" aria-expanded={isMobileMenuOpen} onClick={() => setIsMobileMenuOpen(true)}><Icon name="menu" size={24} /></button>
           </div>
         </div>
       </header>
-
-      <MobileOffcanvas
-        isOpen={isMobileMenuOpen}
-        onClose={() => setIsMobileMenuOpen(false)}
-      />
+      <MobileOffcanvas isOpen={isMobileMenuOpen} onClose={closeMenu} returnFocusRef={menuButton} />
     </>
   );
 }
-
-export default Header;

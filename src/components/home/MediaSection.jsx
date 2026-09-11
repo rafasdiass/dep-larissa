@@ -16,15 +16,15 @@ export function MediaSection({ onOpenVideo }) {
   return (
     <section className="nikolas-media-section" aria-labelledby="media-heading">
       <div className="container-xl">
-        <div className="section-head-nikolas text-center mb-5">
+        <div className="section-head-nikolas mb-5">
           <div className="d-inline-flex align-items-center gap-2 mb-2">
-            <span className="live-dot-pulse"></span>
-            <span className="section-eyebrow-tag">VÍDEOS OFICIAIS & PRONUNCIAMENTOS</span>
+
+            <span className="section-eyebrow-tag">04 / EM VÍDEO</span>
           </div>
           <h2 id="media-heading" className="section-main-heading">
-            EM PRIMEIRA PESSOA COM LARISSA DELUCCA
+            Em primeira pessoa com Larissa DeLucca
           </h2>
-          <p className="section-sub-heading max-w-700 mx-auto">
+          <p className="section-sub-heading">
             Mensagens diretas sobre a luta pelas mães atípicas, autonomia feminina e propostas concretas para o Ceará.
           </p>
         </div>
@@ -37,27 +37,24 @@ export function MediaSection({ onOpenVideo }) {
                 <div className="video-player-box position-relative">
                   <video
                     src={vid.src}
-                    preload="metadata"
+                    poster={vid.poster}
+                    preload="none"
+                    aria-hidden="true"
                     playsInline
                     className="video-element"
                   />
-                  <div
+                  <button
+                    type="button"
                     className="video-overlay-play-cover"
                     onClick={() => onOpenVideo && onOpenVideo(vid)}
-                    role="button"
-                    tabIndex={0}
                     aria-label={`Reproduzir vídeo: ${vid.title}`}
-                    onKeyDown={(e) => {
-                      if (e.key === 'Enter' || e.key === ' ') {
-                        onOpenVideo && onOpenVideo(vid);
-                      }
-                    }}
+
                   >
-                    <div className="play-pulse-circle">
+                    <span className="play-pulse-circle">
                       <Icon name="play" size={20} className="play-icon-triangle" />
-                    </div>
+                    </span>
                     <span className="play-hint-text">ASSISTIR VÍDEO</span>
-                  </div>
+                  </button>
                 </div>
 
                 <div className="video-card-info p-4">
@@ -75,13 +72,14 @@ export function MediaSection({ onOpenVideo }) {
                       className="btn-transcript-toggle"
                       onClick={() => toggleTranscript(vid.id)}
                       aria-expanded={Boolean(openTranscript[vid.id])}
+                      aria-controls={`summary-${vid.id}`}
                     >
                       <Icon
                         name={openTranscript[vid.id] ? 'close' : 'document'}
                         size={15}
                       />
                       <span>
-                        {openTranscript[vid.id] ? 'Fechar transcrição' : 'Ver transcrição acessível'}
+                        {openTranscript[vid.id] ? 'Fechar resumo' : 'Ver resumo do vídeo'}
                       </span>
                     </button>
 
@@ -96,8 +94,8 @@ export function MediaSection({ onOpenVideo }) {
                   </div>
 
                   {openTranscript[vid.id] && (
-                    <div className="transcript-box-panel mt-3 p-3 rounded" role="region">
-                      <strong className="d-block text-white mb-1">Transcrição resumida:</strong>
+                    <div id={`summary-${vid.id}`} className="transcript-box-panel mt-3 p-3 rounded" role="region" aria-label={`Resumo: ${vid.title}`}>
+                      <strong className="d-block mb-1">Resumo do vídeo:</strong>
                       <p className="mb-0 small text-secondary">{vid.description}</p>
                     </div>
                   )}

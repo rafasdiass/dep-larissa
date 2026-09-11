@@ -50,7 +50,7 @@ export default async function handler(req, res) {
       });
     }
 
-    if (!consent) {
+    if (consent !== true) {
       return res.status(400).json({
         error: 'Bad Request',
         message: 'O consentimento com a política de privacidade (LGPD) é obrigatório.',
@@ -68,17 +68,26 @@ export default async function handler(req, res) {
       source: 'website_oficial_larissa_delucca',
     };
 
-    // Forwarding opcional para webhook se configurado no ambiente Vercel
-    if (process.env.VOLUNTEER_WEBHOOK_URL) {
-      try {
-        await fetch(process.env.VOLUNTEER_WEBHOOK_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload),
-        });
-      } catch (webhookErr) {
-        console.error('Falha no webhook externo:', webhookErr);
-      }
+    // Do not report a registration as saved if no destination received it.
+    if (!process.env.VOLUNTEER_WEBHOOK_URL) {
+      return res.status(503).json({
+        success: false,
+        message: 'O cadastro está temporariamente indisponível. Fale com a equipe pelo WhatsApp.',
+      });
+    }
+    try {
+      const forwarded = await fetch(process.env.VOLUNTEER_WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+        signal: AbortSignal.timeout(10000),
+      });
+      if (!forwarded.ok) throw new Error('Delivery failed');
+    } catch {
+      return res.status(502).json({
+        success: false,
+        message: 'Não foi possível enviar seu cadastro. Tente novamente ou fale com a equipe pelo WhatsApp.',
+      });
     }
 
     return res.status(200).json({

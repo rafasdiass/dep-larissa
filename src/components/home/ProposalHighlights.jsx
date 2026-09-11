@@ -7,7 +7,7 @@ export function ProposalHighlights() {
   const [activeCategory, setActiveCategory] = useState('todos');
 
   const categories = [
-    { id: 'todos', label: 'Todas as Prioridades' },
+    { id: 'todos', label: 'Destaques' },
     { id: 'maternidade', label: 'Maternidade & Inclusão' },
     { id: 'renda', label: 'Autonomia & Renda' },
     { id: 'protecao', label: 'Proteção às Mulheres' },
@@ -22,7 +22,7 @@ export function ProposalHighlights() {
       tag: 'Maternidade & Inclusão',
       title: 'Zerar a Fila de Terapias no SUS para Crianças Atípicas',
       desc: 'Criação de centros regionais com psicólogos, terapeutas ocupacionais e fonoaudiólogos no interior e Região Metropolitana do Ceará.',
-      link: '/propostas/maternidade-cuidado',
+      link: '/propostas/maternidade-infancia-rede-cuidado',
       icon: 'heart',
     },
     {
@@ -32,7 +32,7 @@ export function ProposalHighlights() {
       tag: 'Autonomia & Renda',
       title: 'Microcrédito Produtivo para Mães Solo e Empreendedoras',
       desc: 'Linhas de financiamento com juros subsidiados e capacitação prática da Fundação Mulheres Aceleradas para gerar independência real.',
-      link: '/propostas/autonomia-trabalho',
+      link: '/propostas/autonomia-e-trabalho',
       icon: 'sparkles',
     },
     {
@@ -42,7 +42,7 @@ export function ProposalHighlights() {
       tag: 'Proteção & Segurança',
       title: 'Delegacias da Mulher 24 Horas com Equipe Multidisciplinar',
       desc: 'Plantão permanente e acolhimento com psicólogas e assistentes sociais para resposta imediata à violência doméstica em todo o estado.',
-      link: '/propostas/protecao-mulheres',
+      link: '/propostas/protecao-as-mulheres',
       icon: 'shield',
     },
     {
@@ -52,7 +52,7 @@ export function ProposalHighlights() {
       tag: 'Saúde & Gestão',
       title: 'Prontuário Único Integrado e Fim do Reteste Desnecessário',
       desc: 'Digitalização completa dos exames na rede estadual, eliminando desperdício e acelerando o diagnóstico de famílias que mais precisam.',
-      link: '/propostas/estado-entrega',
+      link: '/propostas/estado-que-enxerga-integra-entrega',
       icon: 'document',
     },
     {
@@ -62,7 +62,7 @@ export function ProposalHighlights() {
       tag: 'Educação Inclusiva',
       title: 'Monitores e Mediadores Especializados nas Escolas Públicas',
       desc: 'Garantia legal de profissionais qualificados em sala de aula para o aprendizado efetivo de crianças neurodivergentes.',
-      link: '/propostas/maternidade-cuidado',
+      link: '/propostas/maternidade-infancia-rede-cuidado',
       icon: 'users',
     },
     {
@@ -72,39 +72,40 @@ export function ProposalHighlights() {
       tag: 'Inovação & Futuro',
       title: 'Bolsa Qualificação Tecnológica para Jovens Cearenses',
       desc: 'Conexão com polos de tecnologia de Fortaleza e interior, preparando a juventude para o mercado digital de alto rendimento.',
-      link: '/propostas/autonomia-trabalho',
+      link: '/propostas/autonomia-e-trabalho',
       icon: 'box',
     },
   ];
 
   const filteredProposals =
     activeCategory === 'todos'
-      ? proposals
+      ? proposals.slice(0, 3)
       : proposals.filter((p) => p.category === activeCategory);
 
   return (
     <section className="proposals-highlight-section" aria-labelledby="proposals-heading">
       <div className="container-xl">
-        <div className="section-head-nikolas text-center mb-5">
+        <div className="section-head-nikolas mb-5">
           <div className="d-inline-flex align-items-center gap-2 mb-2">
-            <span className="live-dot-pulse"></span>
-            <span className="section-eyebrow-tag">AÇÕES LEGISLATIVAS PRIORITÁRIAS</span>
+
+            <span className="section-eyebrow-tag">03 / PROPOSTAS EM DESTAQUE</span>
           </div>
           <h2 id="proposals-heading" className="section-main-heading">
             Propostas que Mudam a Vida Real
           </h2>
-          <p className="section-sub-heading max-w-700 mx-auto">
-            Projetos estruturados com rigor técnico, viabilidade orçamentária e foco intransigente nas famílias cearenses.
+          <p className="section-sub-heading">
+            Saúde, autonomia e proteção: consulte as propostas e veja como cada uma se conecta ao plano de mandato.
           </p>
 
           {/* Filtros Interativos em Pills com JavaScript */}
-          <div className="category-filter-pills d-flex flex-wrap justify-content-center gap-2 mt-4">
+          <div className="category-filter-pills d-flex flex-wrap gap-2 mt-4">
             {categories.map((cat) => (
               <button
                 key={cat.id}
                 type="button"
                 className={`filter-pill-btn ${activeCategory === cat.id ? 'active' : ''}`}
                 onClick={() => setActiveCategory(cat.id)}
+                aria-pressed={activeCategory === cat.id}
               >
                 {cat.label}
               </button>
@@ -112,7 +113,8 @@ export function ProposalHighlights() {
           </div>
         </div>
 
-        {/* Grid de Cards com Números Gigantes no Estilo Nikolas Ferreira */}
+        <p role="status" className="visually-hidden">{filteredProposals.length} propostas em {categories.find((cat) => cat.id === activeCategory)?.label}.</p>
+        {/* The home introduces proposals; the full searchable catalogue is one click away. */}
         <motion.div layout className="row g-4">
           <AnimatePresence mode="popLayout">
             {filteredProposals.map((item) => (
@@ -165,9 +167,9 @@ export function ProposalHighlights() {
         </motion.div>
 
         {/* Link para Todas as Propostas */}
-        <div className="text-center mt-5">
+        <div className="mt-4">
           <Link to="/propostas" className="btn-nikolas-viewall">
-            <span>VER TODAS AS PROPOSTAS PROGRAMÁTICAS</span>
+            <span>Ver todas as propostas</span>
             <Icon name="arrow-right" size={18} />
           </Link>
         </div>

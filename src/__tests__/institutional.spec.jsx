@@ -16,7 +16,7 @@ describe('Sprint 5 — Páginas Institucionais & Materiais', () => {
     expect(screen.getByText(/a força da experiência vivida/i)).toBeInTheDocument();
     expect(screen.getByText(/marcos da trajetória/i)).toBeInTheDocument();
 
-    const bioImg = screen.getByRole('img', { name: /larissa delucca em diálogo com mulheres e mães cearenses/i });
+    const bioImg = screen.getByRole('img', { name: /retrato de perfil de larissa delucca/i });
     expect(bioImg).toBeInTheDocument();
   });
 

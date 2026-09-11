@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { socialConfig } from '../../config/social.config';
 
 export function VolunteerForm({ onSuccess }) {
   const [formData, setFormData] = useState({
@@ -72,15 +73,14 @@ export function VolunteerForm({ onSuccess }) {
         body: JSON.stringify(formData),
       });
 
-      if (res.ok) {
+      const result = await res.json().catch(() => null);
+      if (res.ok && result?.success === true) {
         setStatus('success');
         if (onSuccess) onSuccess();
       } else {
-        const errorData = await res.json().catch(() => ({}));
-        throw new Error(errorData.message || 'Erro ao processar envio. Tente diretamente pelo WhatsApp.');
+        throw new Error(result?.message || 'Erro ao processar envio. Tente diretamente pelo WhatsApp.');
       }
     } catch (err) {
-      console.error(err);
       setStatus('error');
       setErrorMessage(err.message || 'Falha na conexão. Você pode nos contatar diretamente no WhatsApp.');
     }
@@ -123,6 +123,7 @@ export function VolunteerForm({ onSuccess }) {
         <div className="alert alert-danger mb-4 small" role="alert" data-testid="form-error">
           <i className="bi bi-exclamation-triangle-fill me-2" />
           {errorMessage}
+          <a href={socialConfig.whatsapp.url} target="_blank" rel="noreferrer" className="d-block mt-2 fw-semibold">Conversar diretamente no WhatsApp</a>
         </div>
       )}
 
@@ -148,6 +149,7 @@ export function VolunteerForm({ onSuccess }) {
           type="text"
           id="form-name"
           name="name"
+          autoComplete="name"
           className="form-control"
           placeholder="Ex: Maria Francisca Silva"
           value={formData.name}
@@ -165,6 +167,8 @@ export function VolunteerForm({ onSuccess }) {
             type="tel"
             id="form-whatsapp"
             name="whatsapp"
+            autoComplete="tel-national"
+            inputMode="tel"
             className="form-control"
             placeholder="Ex: (85) 98888-0000"
             value={formData.whatsapp}
@@ -198,6 +202,7 @@ export function VolunteerForm({ onSuccess }) {
           type="email"
           id="form-email"
           name="email"
+          autoComplete="email"
           className="form-control"
           placeholder="Ex: maria@email.com"
           value={formData.email}
